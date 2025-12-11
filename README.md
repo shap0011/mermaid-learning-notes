@@ -1,4 +1,4 @@
-# Udemy – _Mastering Mermaid.js: Diagram, Charts and Data Visualization_
+# _Mastering Mermaid.js: Diagram, Charts and Data Visualization_
 
 This repository documents my learning journey through the **Udemy course on Mermaid.js**, a powerful tool for creating diagrams, charts, and visualizations using simple Markdown syntax.
 Here you’ll find concise guides, tips, and examples I create as I progress through the course.
