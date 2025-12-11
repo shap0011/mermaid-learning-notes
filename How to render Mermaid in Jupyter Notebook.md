@@ -29,11 +29,13 @@ Image(url="https://mermaid.ink/img/pako:eNpVjkFPg0AQhf_KZk6a0GYBKd09mFiqvTTRxJ6E
 
 You need the `mermaid` Jupyter extension:
 
+<pre>
 ```bash
 
 pip install mermaid
 
 ```
+</pre>
 
 Then in a **Markdown cell:**
 
