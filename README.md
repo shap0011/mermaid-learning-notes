@@ -6,7 +6,7 @@ Easily and quickly create flowchart, mindmap , User journey, Entity Relationship
 
 ## Table of Links:
 
-|                     |                                                                                                                                |
+| Title               | Link                                                                                                                           |
 | :------------------ | :----------------------------------------------------------------------------------------------------------------------------- |
 | Mermaid             | [`https://mermaid.js.org/`](https://mermaid.js.org/)                                                                           |
 | Documentation       | [`https://mermaid.js.org/intro/`](https://mermaid.js.org/intro/)                                                               |
