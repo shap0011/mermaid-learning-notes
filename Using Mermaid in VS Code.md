@@ -64,6 +64,13 @@ graph LR
     fa:fa-check-->fa:fa-coffee
 ```
 
+- doesn't work, only in enhanced preview, not publishes on GitHub
+
+```mermaid
+graph LR
+    A(["✅ Done"]) --> B(["☕ Break"])
+```
+
 ---
 
 Markdown Preview Enhanced
