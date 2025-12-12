@@ -52,3 +52,5 @@ Install `Markdown Preview Enhanced` extension
 Author: Yiyi Wang
 Downloads: 1M+
 ID: shd101wyy.markdown-preview-enhanced
+
+---

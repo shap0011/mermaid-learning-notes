@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- https://mermaid.js.org/config/usage.html -->
+
+    <h3>Flowchart Sample</h3>
+
+    <pre class="mermaid">
+        flowchart TD
+            A[Christmas] -->|Get money| B(Go shopping)
+            B --> C{Let me think}
+            C -->|One| D[Laptop]
+            C -->|Two| E[iPhone]
+            C -->|Three| F[fa:fa-car Car]
+    </pre>
+
+    <h3>A Class Diagram Sample</h3>
+
+    <pre class="mermaid">
+        classDiagram
+            Animal <|-- Duck
+            Animal <|-- Fish
+            Animal <|-- Zebra
+            Animal : +int age
+            Animal : +String gender
+            Animal: +isMammal()
+            Animal: +mate()
+            class Duck{
+            +String beakColor
+            +swim()
+            +quack()
+            }
+            class Fish{
+            -int sizeInFeet
+            -canEat()
+            }
+            class Zebra{
+            +bool is_wild
+            +run()
+            }
+    </pre>
+
+    <script type="module">
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    </script>
+  </body>
+</html>
