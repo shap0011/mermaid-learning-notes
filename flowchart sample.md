@@ -160,6 +160,93 @@ flowchart LR
 
 ## More on Working with Links
 
+````
+```mermaid
+flowchart
+     %% A --> C
+     %% A --> D
+     %% B --> C
+     %% B --> D
+
+     A & B --> C & D
+
+```
+````
+
+```mermaid
+flowchart
+     %% A --> C
+     %% A --> D
+     %% B --> C
+     %% B --> D
+
+     A & B --> C & D
+
+```
+
+````
+```mermaid
+flowchart LR
+     A --text--> B --text--> C --text--> A
+```
+````
+
+```mermaid
+flowchart LR
+     A --text--> B --text--> C --text--> A
+
+```
+
+````
+```mermaid
+flowchart
+     A --> C
+     A --> D
+     B --> C
+     B --> D
+     C --> F --> H
+     A ----> G
+     A -...-> I
+     A ====> J
+
+```
+````
+
+```mermaid
+flowchart
+     A --> C
+     A --> D
+     B --> C
+     B --> D
+     C --> F --> H
+     A ----> G
+     A -...-> I
+     A ====> J
+
+```
+
+````
+```mermaid
+flowchart
+      A([Start]) --> B[/Input x/]
+      B --> C{x > 5?}
+      C -..-x |Yes| D((stop))
+      C --> |No| F[/print x/]
+      F --> G[x = x + 1]
+      G --> C
+```
+````
+
+```mermaid
+flowchart
+      A([Start]) --> B[/Input x/]
+      B --> C{x > 5?}
+      C -..-x |Yes| D((stop))
+      C --> |No| F[/print x/]
+      F --> G[x = x + 1]
+      G --> C
+```
+
 ---
 
 ## Working with Subgraph
