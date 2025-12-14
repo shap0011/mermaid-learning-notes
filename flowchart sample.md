@@ -94,6 +94,68 @@ flowchart
 
 ## Working with Links
 
+### Line connection
+
+````
+```mermaid
+flowchart
+      %% solid directional link
+      A --> B
+      %% opened link
+      C --- D
+      %% termination of connection
+      E --x F
+      G --o H
+      %% multidirectional link
+      I <--> J
+      %% dotted link
+      K -.-> L
+      M ==> N
+      %% O --text here--> P
+      O -->|text here| P
+      Q -.text here.-> R
+      S ==>|text here| T
+```
+````
+
+```mermaid
+flowchart
+      %% solid directional link
+      A --> B
+      %% opened link
+      C --- D
+      %% termination of connection
+      E --x F
+      G --o H
+      %% multidirectional link
+      I <--> J
+      %% dotted link
+      K -.-> L
+      M ==> N
+      %% O --text here--> P
+      O -->|text here| P
+      Q -.text here.-> R
+      S ==>|text here| T
+```
+
+### Invisible line connection
+
+````
+```mermaid
+flowchart LR
+      %% invisible line connection
+      x1 ~~~ |text here| x2
+      a;b;c
+```
+````
+
+```mermaid
+flowchart LR
+      %% invisible line connection
+      x1 ~~~ |text here| x2
+      a;b;c
+```
+
 ---
 
 ## More on Working with Links
