@@ -1,0 +1,40 @@
+<!-- <!DOCTYPE html>
+<html lang="en"> -->
+<html>
+  <head>
+    <!-- <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
+    <title>Interactive Mermaid Flowchart</title>
+  </head>
+  <body>
+    <pre class="mermaid">
+        flowchart
+            A([start click])-->B((GitHub))-->C & D --> F[(google.com)]
+
+            click A startclick "start clicking here"
+            click B "https://www.github.com" "Goto GitHub" _blank
+            click F call clickmsg('Going to Google') "start clicking here"
+    </pre>
+
+    <script type="module">
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+      const config = {
+        startOnload: true,
+        securityLevel: "loose",
+      };
+
+      mermaid.initialize(config);
+    </script>
+
+    <script>
+      function startclick() {
+        alert("You Clicked Me - Welcome 😀");
+      }
+
+      function clickmsg(msg) {
+        alert(msg);
+      }
+    </script>
+  </body>
+</html>
