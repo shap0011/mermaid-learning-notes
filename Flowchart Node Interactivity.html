@@ -10,6 +10,26 @@
       crossorigin="anonymous"
     />
     <title>Interactive Mermaid Flowchart</title>
+    <style>
+      .tooltip-box {
+        position: fixed; /* follows cursor anywhere */
+        display: none;
+        max-width: 260px;
+        padding: 6px 10px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        background: rgba(0, 0, 0, 0.85);
+        color: #fff;
+        z-index: 9999;
+        pointer-events: none; /* don’t block clicks */
+      }
+
+      .mermaid svg g.node,
+      .mermaid svg g.node foreignObject,
+      .mermaid svg g.node .nodeLabel {
+        pointer-events: all;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -20,10 +40,15 @@
           flowchart
               A([start click])-->B((GitHub))-->C & D[YouTube] --> F[(google.com)]
 
-              click A startclick "Start clicking here"
-              click B "https://www.github.com" "Goto GitHub" _blank
-              click F call clickmsg('Going to Google') "Click to browse Google.com"
-              click D call clickmsg('Going to YouTube') "Click to browse YouTube"
+              %% click A startclick "Start clicking here"
+              %% click B "https://www.github.com" "Goto GitHub" _blank
+              %% click F call clickmsg('Going to Google') "Click to browse Google.com"
+              %% click D call clickmsg('Going to YouTube') "Click to browse YouTube"
+
+              click A startclick
+              click B "https://www.github.com" _blank
+              click F call clickmsg('Going to Google')
+              click D call clickmsg('Going to YouTube')
           </pre
         >
 
@@ -41,30 +66,23 @@
 
             one --> two
 
-            click A1 call clickmsg('You clicked A1') "Clicking one"
-            click B1 call clickmsg('You clicked B1') "Clicking two"
+            %% click A1 call clickmsg('You clicked A1') "Clicking one"
+            %% click B1 call clickmsg('You clicked B1') "Clicking two"
+
+            click A1 call clickmsg('You clicked A1')
+            click B1 call clickmsg('You clicked B1')
             
           </pre
         >
+        <div
+          id="mmd-tooltip"
+          class="tooltip-box"
+          role="tooltip"
+          aria-hidden="true"
+        ></div>
       </main>
       <footer></footer>
     </div>
-    <script type="module">
-      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-
-      const config = {
-        startOnload: true,
-        securityLevel: "loose",
-        flowchart: {
-          useMaxWidth: true,
-          htmlLabels: true,
-          //curve: "cardinal",
-          curve: "linear",
-        },
-      };
-
-      mermaid.initialize(config);
-    </script>
 
     <script>
       function startclick() {
@@ -74,6 +92,83 @@
       function clickmsg(msg) {
         alert(msg);
       }
+    </script>
+
+    <script type="module">
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+      mermaid.initialize({
+        startOnload: false, // IMPORTANT: we render manually
+        securityLevel: "loose",
+        flowchart: { useMaxWidth: true, htmlLabels: true, curve: "linear" },
+      });
+
+      // Render Mermaid AFTER the page is ready
+      await mermaid.run({ querySelector: ".mermaid" });
+
+      // Tooltip text by node label (what you SEE inside the node)
+      const tooltips = {
+        "start click": "Start clicking here",
+        GitHub: "Go to GitHub",
+        "google.com": "Click to browse Google.com",
+        YouTube: "Click to browse YouTube",
+        A1: "Clicking one",
+        B1: "Clicking two",
+      };
+
+      const tip = document.getElementById("mmd-tooltip");
+
+      const show = (text) => {
+        tip.textContent = text;
+        tip.style.display = "block";
+        tip.setAttribute("aria-hidden", "false");
+      };
+
+      const hide = () => {
+        tip.style.display = "none";
+        tip.setAttribute("aria-hidden", "true");
+      };
+
+      const move = (e) => {
+        tip.style.left = `${e.clientX + 12}px`;
+        tip.style.top = `${e.clientY + 12}px`;
+      };
+
+      // --- Tooltips (Edge-safe) ---
+      const normalizeLabel = (s) => (s || "").replace(/\s+/g, " ").trim();
+
+      const bindTooltips = () => {
+        const svgs = document.querySelectorAll("svg");
+
+        svgs.forEach((svg) => {
+          const nodes = svg.querySelectorAll("g.node");
+
+          nodes.forEach((g) => {
+            // Mermaid v10 + htmlLabels uses foreignObject/span.nodeLabel (not <text>)
+            const label = normalizeLabel(
+              g.querySelector(".nodeLabel")?.textContent ||
+                g.querySelector("text")?.textContent
+            );
+
+            const tooltipText = tooltips[label];
+            if (!tooltipText) return;
+
+            const anchor = g.closest("a");
+            const target = anchor || g;
+
+            // Ensure events can fire
+            target.style.pointerEvents = "all";
+            g.style.pointerEvents = "all";
+
+            target.addEventListener("mouseenter", () => show(tooltipText));
+            target.addEventListener("mousemove", move);
+            target.addEventListener("mouseleave", hide);
+          });
+        });
+      };
+
+      // Bind after Mermaid has rendered
+      bindTooltips();
     </script>
   </body>
 </html>
