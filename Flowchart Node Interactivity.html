@@ -1,54 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-  <html>
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-        crossorigin="anonymous"
-      />
-      <title>Interactive Mermaid Flowchart</title>
-    </head>
-    <body>
-      <div class="container">
-        <nav>Navigation Bar</nav>
-        <main>
-          <h1>Flowchart Node Interactivity</h1>
-          <pre class="mermaid">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <title>Interactive Mermaid Flowchart</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav>Navigation Bar</nav>
+      <main>
+        <h1>Flowchart Node Interactivity</h1>
+        <pre class="mermaid">
           flowchart
-              A([start click])-->B((GitHub))-->C & D --> F[(google.com)]
+              A([start click])-->B((GitHub))-->C & D[YouTube] --> F[(google.com)]
 
-              click A startclick "start clicking here"
+              click A startclick "Start clicking here"
               click B "https://www.github.com" "Goto GitHub" _blank
-              click F call clickmsg('Going to Google') "start clicking here"
-        </pre
-          >
-        </main>
-        <footer></footer>
-      </div>
-      <script type="module">
-        import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+              click F call clickmsg('Going to Google') "Click to browse Google.com"
+              click D call clickmsg('Going to YouTube') "Click to browse YouTube"
+          </pre
+        >
 
-        const config = {
-          startOnload: true,
-          securityLevel: "loose",
-        };
+        <pre class="mermaid">
+          flowchart LR
+              
+            subgraph one
+                A1 --> A2
+            end
 
-        mermaid.initialize(config);
-      </script>
+            subgraph two
+                direction LR
+                B1 --> B2 & B3
+            end
 
-      <script>
-        function startclick() {
-          alert("You Clicked Me - Welcome 😀");
-        }
+            one --> two
 
-        function clickmsg(msg) {
-          alert(msg);
-        }
-      </script>
-    </body>
-  </html>
+            click A1 call clickmsg('You clicked A1') "Clicking one"
+            click B1 call clickmsg('You clicked B1') "Clicking two"
+            
+          </pre
+        >
+      </main>
+      <footer></footer>
+    </div>
+    <script type="module">
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+      const config = {
+        startOnload: true,
+        securityLevel: "loose",
+        flowchart: {
+          useMaxWidth: true,
+          htmlLabels: true,
+          //curve: "cardinal",
+          curve: "linear",
+        },
+      };
+
+      mermaid.initialize(config);
+    </script>
+
+    <script>
+      function startclick() {
+        alert("You Clicked Me - Welcome 😀");
+      }
+
+      function clickmsg(msg) {
+        alert(msg);
+      }
+    </script>
+  </body>
 </html>
