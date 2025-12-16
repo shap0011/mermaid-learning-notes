@@ -305,7 +305,7 @@ graph LR
 
 ## Flowchart Node Interactivity
 
-[Flowchart Node Interactivity](Flowchart%20Node%20Interactivity.html)
+[Flowchart Node Interactivity](https://shap0011.github.io/mermaid-learning-notes/Flowchart%20Node%20Interactivity.html)
 
 ---
 
