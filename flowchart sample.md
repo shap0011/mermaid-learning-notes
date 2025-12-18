@@ -1,10 +1,11 @@
 # Flowchart Diagram
 
-## Introduction to Flowchart
-
 ---
 
-## Flowchart Basics
+## Basic Flowchart Structure
+
+- Simple node connections
+- Default orientation
 
 ````
 ```mermaid
@@ -16,6 +17,53 @@ flowchart
 
 ```mermaid
 flowchart
+    a-->b
+
+```
+
+### Orientation & Direction
+
+- TD / TB / LR / BT / RL
+- Direction errors and defaults
+
+````
+```mermaid
+flowchart LR
+    a-->b
+
+```
+````
+
+```mermaid
+flowchart LR
+    a-->b
+
+```
+
+````
+```mermaid
+flowchart BT
+    a-->b
+
+```
+````
+
+```mermaid
+flowchart BT
+    a-->b
+
+```
+
+````
+```mermaid
+flowchart RL
+    a-->b
+
+```
+````
+
+```mermaid
+flowchart RL
     a-->b
 
 ```
@@ -23,8 +71,6 @@ flowchart
 ---
 
 ## Orientation and Error Handling
-
-TD; TB;
 
 ````
 ```mermaid
@@ -54,7 +100,12 @@ flowchart
 
 ---
 
-## Working with Nodes - Node Text
+## Node Text & Formatting
+
+- Labels
+- Emojis
+- Multiline text
+- Markdown formatting inside nodes
 
 ````
 ```mermaid
@@ -93,6 +144,13 @@ flowchart
 ---
 
 ## Working with Links
+
+### Link Types
+
+- Solid, dashed, dotted
+- Terminated links
+- Bidirectional links
+- Labeled links
 
 ### Line connection
 
@@ -138,7 +196,10 @@ flowchart
       S ==>|text here| T
 ```
 
-### Invisible line connection
+### Invisible Links
+
+- Layout control
+- Spacing tricks
 
 ````
 ```mermaid
@@ -158,7 +219,11 @@ flowchart LR
 
 ---
 
-## More on Working with Links
+## Advanced Link Patterns
+
+- Multi-source → multi-target
+- Chained links
+- Complex routing
 
 ````
 ```mermaid
