@@ -30,5 +30,5 @@ Short, practical write-ups based on what I’m learning. Each guide focuses on s
 
 ### 2. Flowchart Diagrams — Syntax, Nodes, Links, Subgraphs, and Styling
 
-📄 A hands-on walkthrough of Mermaid flowcharts, covering core syntax, node text formatting, link types, invisible connections, subgraphs, styling rules, and interactive elements. This guide shows both raw Mermaid code and rendered diagrams, making it easier to understand how flowcharts behave in real projects.
+📄 _A hands-on walkthrough of Mermaid flowcharts, covering core syntax, node text formatting, link types, invisible connections, subgraphs, styling rules, and interactive elements. This guide shows both raw Mermaid code and rendered diagrams, making it easier to understand how flowcharts behave in real projects._<br/>
 👉 [Read the guide](https://github.com/shap0011/mermaid-learning-notes/flowchart%20sample.md)
