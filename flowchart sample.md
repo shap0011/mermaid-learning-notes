@@ -316,6 +316,10 @@ flowchart
 
 ## Working with Subgraph
 
+- Simple subgraphs
+- Nested subgraphs
+- Direction overrides
+
 ````
 ```mermaid
 graph LR
@@ -370,13 +374,29 @@ graph LR
 
 ## Flowchart Node Interactivity
 
+### Clickable Nodes
+
+- `click` directive
+- External links
+- JavaScript callbacks
+
+🔗 Live demo:
 [Flowchart Node Interactivity](https://shap0011.github.io/mermaid-learning-notes/Flowchart%20Node%20Interactivity.html)
 
 ---
 
-## Flowchart - Styling Lines and Nodes
+## Styling Nodes & Links
 
-[Flowcharts - Basic Syntax](https://mermaid.js.org/syntax/flowchart.html#a-node-with-text)
+- Curves
+- Classes
+- `linkStyle`
+- `classDef`
+- Inline styles
+
+### References
+
+- Official Flowchart Syntax
+  [Flowcharts - Basic Syntax](https://mermaid.js.org/syntax/flowchart.html#a-node-with-text)
 
 **Styling line curves**
 It is possible to style the type of curve used for lines between items, if the default method does not meet your needs. Available curve styles include `basis`, `bumpX`, `bumpY`, `cardinal`, `catmullRom`, `linear`, `monotoneX`, `monotoneY`, `natural`, `step`, `stepAfter`, and `stepBefore`.
