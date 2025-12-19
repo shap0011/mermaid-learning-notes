@@ -32,3 +32,17 @@ Short, practical write-ups based on what I’m learning. Each guide focuses on s
 
 📄 _A hands-on walkthrough of Mermaid flowcharts, covering core syntax, node text formatting, link types, invisible connections, subgraphs, styling rules, and interactive elements. This guide shows both raw Mermaid code and rendered diagrams, making it easier to understand how flowcharts behave in real projects._<br/>
 👉 [Read the guide](https://github.com/shap0011/mermaid-learning-notes/blob/main/flowchart%20sample.md)
+
+### 3. Sequence Diagram — Messages, Lifelines, Frames, and Real-World Flows
+
+📄 A comprehensive guide to Mermaid sequence diagrams, covering actors and participants, message types, notes and comments, activation boxes, conditional and parallel frames (alt, opt, par, break, critical), grouping and coloring, configuration settings, and common pitfalls. The guide includes progressive examples and a real-world login flow to demonstrate how sequence diagrams model realistic system interactions.<br/>
+👉 [Read the guide](https://github.com/shap0011/mermaid-learning-notes/blob/main/sequence%20diagram.md)
+
+---
+
+## References:
+
+- Udemy. _Mastering Mermaid.js: Diagram, Charts, and Data Visualization_.  
+  https://www.udemy.com/course/mastering-mermaidjs-diagram-charts-and-data-visualization/
+- Mermaid. _Mermaid.js Documentation_.  
+  https://mermaid.js.org/
