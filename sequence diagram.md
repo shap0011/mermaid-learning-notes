@@ -4,7 +4,44 @@ A sequence diagram is a type of interaction diagram in UML (Unified Modeling Lan
 
 ---
 
-## SD Uses
+## Table of Contents
+
+- [What you’ll learn](#what-youll-learn)
+- [Sequence Diagram Uses](#sequence-diagram-uses)
+- [Creating and Connecting Participants](#creating-and-connecting-participants)
+- [Working with Messages, Notes and Comments](#working-with-messages-notes-and-comments)
+  - [Message Types](#message-types)
+  - [Notes and Comments](#notes-and-comments)
+- [Sequence Objects Advanced](#sequence-objects-advanced)
+- [Activation Box](#activation-box)
+- [Conditional Frames (`alt`, `opt`)](#conditional-frames-alt-opt)
+- [Exercise (Actors, Participants, Messages, Alt)](#exercise-actors-participants-messages-alt)
+- [Parallel Frames (`par`)](#parallel-frames-par)
+- [Critical Regions (`critical`)](#critical-regions-critical)
+- [More on Frames](#more-on-frames)
+- [Grouping and Coloring](#grouping-and-coloring)
+- [Common Pitfalls](#common-pitfalls)
+- [Configuration Settings](#configuration-settings)
+- [Real-World Example: Login Flow](#real-world-example-login-flow)
+
+---
+
+## What you’ll learn
+
+---
+
+- What sequence diagrams are and when to use them
+- How to define actors and participants
+- Message types, notes, and comments
+- Activation boxes and lifelines
+- Conditional logic (alt, opt, break)
+- Parallel and critical sections
+- Grouping, coloring, and layout
+- Common configuration options in Mermaid
+
+---
+
+## Sequence Diagram Uses
 
 - **Understanding System Behavior**: Sequence diagrams provide a visual representation of how different components or objects within a system interact and the flow of messages between them. this aids in understanding the overall behavior of the system.
 - **Communication**: As a visual communication tool, sequence diagrams facilitate discussions among stakeholders by presenting complex interactions in a clear and accessible format. They are useful for conveying ideas between technical and non-technical team members.
@@ -56,6 +93,28 @@ sequenceDiagram
 
 ## Working with messages, Notes and comments
 
+### Message Types
+
+- `->>` synchronous message
+- `--)` return message
+- `--x` failed or terminated message
+
+These message symbols describe how information flows between participants and help distinguish normal calls, responses, and error cases.
+
+### Notes and Comments
+
+Notes are used to add explanations or context to a sequence diagram without affecting the message flow.
+They are especially useful for documentation, teaching, and clarifying complex interactions.
+
+Supported note positions:
+
+- Note right of `<participant>`
+- Note left of `<participant>`
+- Note over `<participant>`
+- Note over `<participant1>`, `<participant2>`
+
+Comments (lines starting with %) are ignored by Mermaid and are useful for documenting the diagram source.
+
 ````
 ```mermaid
 sequenceDiagram
@@ -70,15 +129,6 @@ sequenceDiagram
     % return message
     James--)Alice: Hello Alice
     Alice--xBob: Are you there Bob
-
-    % Note Comment
-    % Note <position> of <object(s)>: <description>
-    % message Symbols
-    % - (solid line)
-    % -- (dotted line)
-    % > (no arrow)
-    % >> (Filled Arrow - sync)
-    % ) (stick arrow - async)
 
 ```
 ````
@@ -96,15 +146,6 @@ sequenceDiagram
     % return message
     James--)Alice: Hello Alice
     Alice--xBob: Are you there Bob
-
-    % Note Comment
-    % Note <position> of <object(s)>: <description>
-    % message Symbols
-    % - (solid line)
-    % -- (dotted line)
-    % > (no arrow)
-    % >> (Filled Arrow - sync)
-    % ) (stick arrow - async)
 
 ```
 
@@ -207,7 +248,7 @@ sequenceDiagram
 
 ---
 
-## Alternative Frame 1
+## Conditional Frames (`alt`, `opt`)
 
 (alt..else..end, opt..end)
 
@@ -317,7 +358,7 @@ sequenceDiagram
 
 ---
 
-## Alternative frame 2
+## Parallel Frames (`par`)
 
 (Parallel communication)
 
@@ -363,7 +404,7 @@ sequenceDiagram
 
 ---
 
-## Alternative Frame 3
+## Critical Regions (`critical`)
 
 (Critical Region)
 
@@ -542,7 +583,21 @@ sequenceDiagram
 
 ---
 
+## Common Pitfalls
+
+- Mermaid config blocks use **YAML, not JSON** (no commas)
+- Numeric config values must be numbers, not strings
+- VS Code preview is narrower than GitHub — increase `diagramMarginX`
+- `showSequenceNumbers: true` makes `% autonumber` redundant
+
+---
+
 ## Configuration Settings
+
+Mermaid allows per-diagram configuration using a YAML front-matter block.
+This is supported in VS Code, GitHub, and Mermaid Live.
+
+⚠️ YAML rules apply: no commas, correct indentation, numeric values only.
 
 ````
 ```mermaid
@@ -587,4 +642,69 @@ sequenceDiagram
     Alice->>John: Hello John, how are you?
     note right of John: John got a job
     John--)Alice: Great!
+```
+
+---
+
+## Real-World Example: Login Flow
+
+```mermaid
+---
+config:
+  theme: default
+  sequence:
+    showSequenceNumbers: true
+    diagramMarginX: 40
+    diagramMarginY: 20
+    noteMargin: 10
+---
+
+sequenceDiagram
+    actor User
+    participant UI as "Web App (UI)"
+    participant API as "Auth API"
+    participant DB as "User DB"
+    participant MFA as "MFA Service"
+    participant JWT as "Token Service"
+
+    User->>UI: Enter email + password\nClick “Sign in”
+    UI->>API: POST /login (credentials)
+
+    API->>DB: Find user by email
+    DB-->>API: User record (status, pwdHash, mfaEnabled)
+
+    alt Account locked / disabled
+        API--xUI: 403 Account unavailable
+        UI-->>User: Show error + support link
+    else Account active
+        API->>API: Verify password hash
+        alt Invalid credentials
+            API--xUI: 401 Invalid email/password
+            UI-->>User: Show error (try again)
+        else Valid credentials
+            opt MFA enabled
+                API->>MFA: Create MFA challenge
+                MFA-->>API: Challenge ID
+                API-->>UI: 200 MFA required (challengeId)
+                UI-->>User: Prompt for verification code
+                User->>UI: Enter MFA code
+                UI->>API: POST /login/mfa (challengeId, code)
+                API->>MFA: Verify code
+                alt MFA failed
+                    MFA--xAPI: Invalid/expired code
+                    API--xUI: 401 MFA failed
+                    UI-->>User: Show error (resend code)
+                else MFA success
+                    MFA-->>API: Verified
+                end
+            end
+
+            API->>JWT: Issue access + refresh tokens
+            JWT-->>API: Tokens
+            API-->>UI: 200 Login success (tokens)
+            UI-->>User: Redirect to dashboard
+            Note over UI,User: Store tokens securely (prefer HttpOnly cookies)
+        end
+    end
+
 ```
