@@ -482,3 +482,106 @@ sequenceDiagram
 ```
 
 ---
+
+## Grouping and Coloring
+
+(box, rect tag)
+
+🔗 W3C Wiki reference link:
+[CSS/Properties/color/keywords](https://www.w3.org/wiki/CSS/Properties/color/keywords)
+
+````
+```mermaid
+sequenceDiagram
+    % box rgb(r,g,b,a) Frontend Interface
+    box rgb(0,180,190,0.3) Frontend Interface
+    % box aqua Frontend Interface
+        participant User
+        participant App as "Shopping App"
+    end
+
+    box blanchedalmond Backend Interface
+        participant Gateway as "Payment"
+        participant Bank
+    end
+
+    rect rgb(255,182,193,.8)
+    User->>+App: Select Item and Checkout
+    App->>+Gateway: Initiate payment Request
+    end
+    Gateway->>+Bank: Process Payment
+    Bank-->>-Gateway: Payment Approved
+    Gateway-->>-App: Payment Success
+    App-->>-User: Order Confirmed
+```
+````
+
+```mermaid
+sequenceDiagram
+    % box rgb(r,g,b,a) Frontend Interface
+    box rgb(0,180,190,0.3) Frontend Interface
+    % box aqua Frontend Interface
+        participant User
+        participant App as "Shopping App"
+    end
+
+    box blanchedalmond Backend Interface
+        participant Gateway as "Payment"
+        participant Bank
+    end
+
+    rect rgb(255,182,193,.8)
+    User->>+App: Select Item and Checkout
+    App->>+Gateway: Initiate payment Request
+    end
+    Gateway->>+Bank: Process Payment
+    Bank-->>-Gateway: Payment Approved
+    Gateway-->>-App: Payment Success
+    App-->>-User: Order Confirmed
+```
+
+---
+
+## Configuration Settings
+
+````
+```mermaid
+---
+config:
+    # theme: dark
+    theme: default,
+    sequence:
+        showSequenceNumbers: true,
+        diagramMarginY: 30,
+        noteMargin: 30
+---
+
+sequenceDiagram
+    % autonumber
+    participant Alice
+    participant John
+    Alice->>John: Hello John, how are you?
+    note right of John: John got a job
+    John--)Alice: Great!
+```
+````
+
+```mermaid
+---
+config:
+    # theme: dark
+    theme: default,
+    sequence:
+        showSequenceNumbers: true,
+        diagramMarginY: 30,
+        noteMargin: 30
+---
+
+sequenceDiagram
+    % autonumber
+    participant Alice
+    participant John
+    Alice->>John: Hello John, how are you?
+    note right of John: John got a job
+    John--)Alice: Great!
+```
