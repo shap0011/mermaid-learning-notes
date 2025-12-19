@@ -549,15 +549,16 @@ sequenceDiagram
 ---
 config:
     # theme: dark
-    theme: default,
+    theme: default
     sequence:
-        showSequenceNumbers: true,
-        diagramMarginY: 30,
-        noteMargin: 30
+        showSequenceNumbers: true
+        diagramMarginX: 60
+        diagramMarginY: 30
+        noteMargin: 10
+
 ---
 
 sequenceDiagram
-    % autonumber
     participant Alice
     participant John
     Alice->>John: Hello John, how are you?
@@ -569,7 +570,8 @@ sequenceDiagram
 ```mermaid
 ---
 config:
-    theme: default,
+    # theme: dark
+    theme: default
     sequence:
         showSequenceNumbers: true
         diagramMarginX: 60
@@ -579,6 +581,7 @@ config:
 ---
 
 sequenceDiagram
+    % autonumber
     participant Alice
     participant John
     Alice->>John: Hello John, how are you?
