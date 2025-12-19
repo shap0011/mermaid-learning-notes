@@ -2,6 +2,27 @@
 
 ---
 
+## Table of Contents
+
+- [Basic Flowchart Structure](#basic-flowchart-structure)
+  - [Orientation & Direction](#orientation--direction)
+- [Orientation and Error Handling](#orientation-and-error-handling)
+- [Node Text & Formatting](#node-text--formatting)
+- [Working with Links](#working-with-links)
+  - [Link Types](#link-types)
+  - [Line Connection](#line-connection)
+  - [Invisible Links](#invisible-links)
+- [Advanced Link Patterns](#advanced-link-patterns)
+- [Working with Subgraph](#working-with-subgraph)
+- [Flowchart Node Interactivity](#flowchart-node-interactivity)
+  - [Clickable Nodes](#clickable-nodes)
+- [Styling Nodes & Links](#styling-nodes--links)
+  - [References](#references)
+- [Real-World Example: IT Support Ticket Flow](#real-world-example-it-support-ticket-flow)
+- [Real-World Example: IT Support Ticket Flow (Styled)](#real-world-example-it-support-ticket-flow-styled)
+
+---
+
 ## Basic Flowchart Structure
 
 - Simple node connections
@@ -465,4 +486,160 @@ flowchart
       %% class 'default' applies style to all elements of the diagram
 
       %% class A,C,D bigger
+```
+
+---
+
+## Real-World Example: IT Support Ticket Flow
+
+A practical flowchart showing how an employee submits an IT ticket, how it gets triaged, and what happens for urgent vs. normal requests.
+
+```mermaid
+flowchart TD
+    A([Employee has an issue]) --> B[Open IT Portal]
+    B --> C["Fill out ticket form\n(category, description, attachments)"]
+    C --> D{Is it urgent?}
+
+    D -- Yes --> E[Mark as 'Urgent'\nAdd impact + deadline]
+    D -- No --> F[Submit as 'Normal']
+
+    E --> G[Submit Ticket]
+    F --> G[Submit Ticket]
+
+    G --> H["Ticket Created\n(ID generated)"]
+    H --> I["Auto-notify Employee\n(email confirmation)"]
+
+    %% Triage process
+    H --> J{Auto-triage rules match?}
+    J -- Yes --> K["Assign to correct queue\n(Network / Hardware / Apps)"]
+    J -- No --> L[Service Desk reviews\nand categorizes manually]
+    L --> K
+
+    %% Parallel actions after assignment
+    K --> M{More info needed?}
+    M -- Yes --> N[Request clarification\nfrom Employee]
+    N --> O[Employee replies\nwith details]
+    O --> P[Update ticket]
+    P --> Q[Start investigation]
+    M -- No --> Q[Start investigation]
+
+    %% Resolution paths
+    Q --> R{Resolved?}
+    R -- No --> S[Escalate to Tier 2/3\nor vendor]
+    S --> Q
+
+    R -- Yes --> T[Provide fix / workaround\nand document steps]
+    T --> U[Employee confirms\nissue is fixed]
+    U --> V{Employee satisfied?}
+    V -- Yes --> W([Close Ticket])
+    V -- No --> X[Reopen / continue work]
+    X --> Q
+
+    %% Optional grouping (makes diagram easier to read)
+    subgraph Auto Notifications
+      I
+    end
+
+    subgraph Service Desk / IT Team
+      J
+      K
+      L
+      M
+      N
+      O
+      P
+      Q
+      R
+      S
+      T
+    end
+
+```
+
+---
+
+## Real-World Example: IT Support Ticket Flow (Styled)
+
+Here is the styled + class-based version of the Real-World IT Support Ticket Flow, designed to demonstrate styling, classes, and link styles and fit naturally into your “Styling Nodes & Links” section.
+
+```mermaid
+%%{
+  init:{
+    "flowchart":{
+      "curve":"natural"
+    }
+  }
+}%%
+
+flowchart TD
+    %% Nodes
+    A([Employee has an issue]):::startEnd --> B[Open IT Portal]
+    B --> C["Fill out ticket form<br/>(category, description, attachments)"]
+    C --> D{Is it urgent?}:::decision
+
+    D -- Yes --> E[Mark as Urgent<br/>Add impact & deadline]:::urgent
+    D -- No --> F[Submit as Normal]
+
+    E --> G[Submit Ticket]
+    F --> G[Submit Ticket]
+
+    G --> H[Ticket Created<br/>ID generated]:::system
+    H --> I[Email confirmation sent]:::notification
+
+    %% Triage
+    H --> J{Auto-triage rules match?}:::decision
+    J -- Yes --> K["Auto-assign to queue<br/>(Network / Hardware / Apps)"]
+    J -- No --> L[Service Desk reviews<br/>and categorizes manually]
+    L --> K
+
+    %% Investigation
+    K --> M{More info needed?}:::decision
+    M -- Yes --> N[Request clarification<br/>from employee]
+    N --> O[Employee provides details]
+    O --> P[Update ticket]
+    P --> Q[Start investigation]
+    M -- No --> Q[Start investigation]
+
+    %% Resolution loop
+    Q --> R{Resolved?}:::decision
+    R -- No --> S[Escalate to Tier 2 / Vendor]:::escalation
+    S --> Q
+
+    R -- Yes --> T[Provide fix / workaround<br/>Document solution]
+    T --> U[Employee confirms fix]
+    U --> V{Satisfied?}:::decision
+    V -- Yes --> W([Close Ticket]):::startEnd
+    V -- No --> X[Reopen ticket]
+    X --> Q
+
+    %% Subgraphs
+    subgraph Notifications
+        I
+    end
+
+    subgraph IT Support Team
+        J
+        K
+        L
+        M
+        N
+        O
+        P
+        Q
+        R
+        S
+        T
+    end
+
+    %% Classes
+    classDef startEnd fill:#0b7285,color:#ffffff,stroke:#0b7285,stroke-width:2px;
+    classDef decision fill:#fff3bf,stroke:#f59f00,stroke-width:2px;
+    classDef urgent fill:#ffe3e3,stroke:#fa5252,stroke-width:2px;
+    classDef escalation fill:#f8d7da,stroke:#c92a2a,stroke-width:2px;
+    classDef system fill:#e7f5ff,stroke:#1c7ed6,stroke-width:2px;
+    classDef notification fill:#e6fcf5,stroke:#0ca678,stroke-width:2px;
+
+    %% Link styling
+    linkStyle 2 stroke:#fa5252,stroke-width:3px;
+    linkStyle 13 stroke:#c92a2a,stroke-width:3px;
 ```
