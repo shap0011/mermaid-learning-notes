@@ -237,3 +237,109 @@ classDiagram
     Reptile *-- Platypus
 
 ```
+
+---
+
+## Titles, Notes, Label and comments
+
+````
+```mermaid
+---
+title: Animal Relationship
+---
+classDiagram
+    direction RL
+    class Animal {
+        - age int
+        + makeSound() void
+    }
+
+    class Mammal {
+        # furColor string
+        - giveBirth() void
+    }
+
+    class Reptile {
+        # scaleType string
+        + layEggs() void
+    }
+
+    class Dog {
+        # breed string
+        + bark() void
+    }
+
+    class Dolphin {
+        + swim() void
+    }
+
+    class Platypus {
+        # poisonous boolean
+        + swim() void
+    }
+
+    %% Comment: Animal is the base for Mammal and Reptile.
+    %% Comment: Mammal and Reptile inherit from Animal.
+    %% Comment: Dog and Cat are mammals with additional features.
+    %% Comment: Dolphin and Platypus are specific types of Mammals and Reptiles.
+
+    Animal <|-- Mammal : Inheritance
+    Animal <|-- Reptile : Inheritance
+    Mammal o-- Dog : aggregation
+    Mammal *-- Dolphin : Composition
+    Reptile *-- Platypus : Composition
+
+    note for Mammal "general note here<br/>another line"
+
+```
+````
+
+```mermaid
+---
+title: Animal Relationship
+---
+classDiagram
+    direction RL
+    class Animal {
+        - age int
+        + makeSound() void
+    }
+
+    class Mammal {
+        # furColor string
+        - giveBirth() void
+    }
+
+    class Reptile {
+        # scaleType string
+        + layEggs() void
+    }
+
+    class Dog {
+        # breed string
+        + bark() void
+    }
+
+    class Dolphin {
+        + swim() void
+    }
+
+    class Platypus {
+        # poisonous boolean
+        + swim() void
+    }
+
+    %% Comment: Animal is the base for Mammal and Reptile.
+    %% Comment: Mammal and Reptile inherit from Animal.
+    %% Comment: Dog and Cat are mammals with additional features.
+    %% Comment: Dolphin and Platypus are specific types of Mammals and Reptiles.
+
+    Animal <|-- Mammal : Inheritance
+    Animal <|-- Reptile : Inheritance
+    Mammal o-- Dog : aggregation
+    Mammal *-- Dolphin : Composition
+    Reptile *-- Platypus : Composition
+
+    note for Mammal "general note here<br/>another line"
+
+```
