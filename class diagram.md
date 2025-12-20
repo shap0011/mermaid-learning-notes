@@ -343,3 +343,23 @@ classDiagram
     note for Mammal "general note here<br/>another line"
 
 ```
+
+---
+
+## Cardinality - Multiplicity
+
+---
+
+## Class Annotation
+
+---
+
+## Namespace and Styling
+
+---
+
+## Styling HTML and CSS
+
+---
+
+## Node Interactivity
