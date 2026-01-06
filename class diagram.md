@@ -348,6 +348,22 @@ classDiagram
 
 ## Cardinality - Multiplicity
 
+- In a class diagram,cardinality is a concept that specifies the number of instances of one class that can be associated with the number of instances of another class. it helps define the multiplicity of associations between classes, indicating how many objects of one class are related to how many objects of another class.
+- Cardinality is represented using notations near the ends of association lines between classes. Common symbols include numbers, ranges, and special symbols. here are some examples of cardinality notations:
+- Classes can be grouped to have a 1:1, 0:1, 1:N, M:1, M:N
+
+Mermaid cardinality options:
+
+- `1` Only 1
+- `0..1` Zero or One
+- `1..*` One or more
+- `*` many
+- `n` n
+- `0..n` zero to n
+- `1..n` one to n
+
+Cardinality can be easily defined by placing the text option within quotes `"` before or after a given arrow. For example:
+
 ---
 
 ## Class Annotation
